@@ -1,0 +1,60 @@
+termcapinfo xterm*|rxvt*|kterm*|Eterm* 'hs:ts=\E]0;:fs=\007:ds=\E]0;\007'
+term "screen-256color"
+screen -t bash1 /bin/bash
+screen -t TODO /bin/zsh clear;t ls;
+screen -t htop /bin/zsh htop
+screen -t zsh4 /bin/zsh
+screen -t zsh5 /bin/zsh
+altscreen on
+term screen-256color
+
+##    Keybindings    ##
+
+# bind <F7> to detach screen from this terminal
+# bind <F8> to kill current session
+# bind <F10> to create a new screen
+# bind <F9> to rename an existing window
+# bind <F11> to move to previous window
+# bind <F12> to move to next window
+#bindkey -k k7 detach
+#bindkey -k k8 kill
+# space in keyboard
+#bindkey -k k; screen
+#bindkey -k k9 title
+bindkey -k F2 next
+
+bind = resize =
+bind + resize +1
+bind - resize -1
+bind _ resize max
+bind c screen 1 # Window numbering starts at 1, not 0.
+bind 0 select 10
+# termcapinfo xterm*|rxvt*|kterm*|Eterm* 'hs:ts=\E]0;:fs=\007:ds=\E]0;\007'i
+# make life easier, f1-f10 selects screens 0-9
+bindkey -k k1 select 1
+bindkey -k k2 select 2
+bindkey -k k3 select 3
+bindkey -k k4 select 4
+bindkey -k k5 select 5
+bindkey -k k6 select 6
+bindkey -k k7 select 7
+bindkey -k k8 select 8
+bindkey -k k9 select 9
+bindkey -k k; select 0
+
+
+# add CPU idle/sustem/user/interrupt stats
+backtick 100 5 5 tail -1 /var/tmp/vermaden-stats-top
+caption always '%{= wk} %= %100` %='
+
+
+#change the hardstatus settings to give an window list at the bottom of the
+#screen, with the time and date and with the current window highlighted
+caption string "%?%F%{= Bk}%? %C%A %D %d-%m-%Y %{= kB} %t%= %?%F%{= Bk}%:%{= wk}%? %n "
+hardstatus alwayslastline
+hardstatus string '%{= kG}[ %{G}%H %{g}][%= %{= kw}%?%-Lw%?%{r}(%{W}%n*%f%t%?(%u)%?%{r})%{w}%?%+Lw%?%?%= %{g}][%{B} %d/%m %{W}%c %{g}]'
+
+
+
+
+
